@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.navbar-fixed {
+  @apply fixed z-[9999] bg-white bg-opacity-70 backdrop-blur-md;
+  box-shadow: inset 0 -1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hamburger-button {
+  @apply w-[30px] h-[2px] my-1.5 block bg-dark rounded-md relative;
+}
+
+.hamburger-active > span:nth-child(1) {
+  @apply top-2;
+}
+
+.hamburger-active > span:nth-child(3) {
+  @apply bottom-2;
+}
