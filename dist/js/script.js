@@ -2,11 +2,16 @@
 window.onscroll = function () {
   const header = document.querySelector("header");
   const fixedNav = header.offsetTop;
+  const toTop = document.querySelector("#to-top");
 
   if (window.pageYOffset > fixedNav) {
     header.classList.add("navbar-fixed");
+    toTop.classList.remove("hidden");
+    toTop.classList.add("flex");
   } else {
     header.classList.remove("navbar-fixed");
+    toTop.classList.add("hidden");
+    toTop.classList.remove("flex");
   }
 };
 
@@ -19,16 +24,31 @@ hamburger.addEventListener("click", function () {
   navMenu.classList.toggle("hidden");
 });
 
-// Change Navbar Link Color
-const sectionHome = document.getElementById("home");
-const sectionAbout = document.getElementById("about");
-const sectionPortfolio = document.getElementById("portfolio");
-const sectionClients = document.getElementById("clients");
-const sectionBlog = document.getElementById("blog");
-const sectionContact = document.getElementById("contact");
-let linkHome = document.querySelector(".link-home");
-let linkAbout = document.querySelector(".link-about");
-let linkPortfolio = document.querySelector(".link-portfolio");
-let linkClients = document.querySelector(".link-clients");
-let linkBlog = document.querySelector(".link-blog");
-let linkContact = document.querySelector(".link-contact");
+// Klik di luar hamburger menu
+window.addEventListener("click", function (e) {
+  if (e.target !== hamburger && e.target !== navMenu) {
+    hamburger.classList.remove("hamburger-active");
+    navMenu.classList.add("hidden");
+  }
+});
+
+// Darkmode toggle
+const darkToggle = document.querySelector("#dark-toggle");
+const html = document.querySelector("html");
+
+darkToggle.addEventListener("click", function () {
+  if (darkToggle.checked) {
+    html.classList.add("dark");
+    localStorage.theme = "dark";
+  } else {
+    html.classList.remove("dark");
+    localStorage.theme = "light";
+  }
+});
+
+// Pindahkan toggle sesuai mode
+if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  darkToggle.checked = true;
+} else {
+  darkToggle.checked = false;
+}
